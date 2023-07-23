@@ -1,9 +1,9 @@
-package com.yinjunbiao.controller;
+package com.qgStudio.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.yinjunbiao.entity.Strip;
-import com.yinjunbiao.service.Impl.StripServiceImpl;
-import com.yinjunbiao.service.StripService;
+import com.qgStudio.entity.Strip;
+import com.qgStudio.service.Impl.StripServiceImpl;
+import com.qgStudio.service.StripService;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -34,8 +34,10 @@ public class Server {
                                 if (byteBuf != null) {
                                     byte[] buf = new byte[1024];
                                     ByteBuf len = byteBuf.readBytes(buf, 0, byteBuf.readableBytes());
+                                    System.out.println(new String(buf));
                                     Strip strip = (Strip) JSON.parseObject(buf, Strip.class);
-                                    service.save(strip);
+//                                    service.insert(strip);
+                                    System.out.println(strip);
                                 }
 
                             }

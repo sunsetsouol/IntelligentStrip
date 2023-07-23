@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qgStudio.mapper.StripMapper">
+
+    <update id="createTable">
+        CREATE TABLE if not exists ${tableName}
+        (
+            `id` bigint primary key AUTO_INCREMENT COMMENT 'id',
+            `equipment` varchar(255) NOT NULL COMMENT '设备编号',
+            `temp` decimal(10,1) DEFAULT NULL COMMENT '温度',
+            `mq` decimal(10,3) DEFAULT NULL COMMENT '烟雾浓度',
+            `socket1` int DEFAULT NULL COMMENT '接口1开关',
+            `socket2` int DEFAULT NULL COMMENT '接口2开关',
+            `socket3` int DEFAULT NULL COMMENT '接口3开关',
+            `vrms1` decimal(10,2) DEFAULT NULL COMMENT '接口1电压',
+            `irms1` decimal(10,4) DEFAULT NULL COMMENT '接口1电流',
+            `pactive1` decimal(10,2) DEFAULT NULL COMMENT '接口1功率',
+            `w_kwh1` decimal(10,4) DEFAULT NULL COMMENT '接口1用电量',
+            `vrms2` decimal(10,2) DEFAULT NULL COMMENT '接口2电压',
+            `irms2` decimal(10,4) DEFAULT NULL COMMENT '接口2电流',
+            `pactive2` decimal(10,2) DEFAULT NULL COMMENT '接口2功率',
+            `w_kwh2` decimal(10,4) DEFAULT NULL COMMENT '接口2用电量',
+            `vrms3` decimal(10,2) DEFAULT NULL COMMENT '接口3电压',
+            `irms3` decimal(10,4) DEFAULT NULL COMMENT '接口3电流',
+            `pactive3` decimal(10,2) DEFAULT NULL COMMENT '接口3功率',
+            `w_kwh3` decimal(10,4) DEFAULT NULL COMMENT '接口3用电量',
+            KEY `fk_equ_id` (`equipment`),
+            CONSTRAINT ${foreignKey} FOREIGN KEY (`equipment`) REFERENCES `user` (`equipment`)
+            )
+    </update>
+
+
+
+</mapper>

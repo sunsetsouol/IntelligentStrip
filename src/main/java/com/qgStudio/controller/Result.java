@@ -1,4 +1,4 @@
-package com.yinjunbiao.controller;
+package com.qgStudio.controller;
 
 public class Result {
 
