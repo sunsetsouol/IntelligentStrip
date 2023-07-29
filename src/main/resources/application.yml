@@ -1,10 +1,11 @@
 server:
-  port: 8080
+  port: 8081
+
 
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/strip?useSSL=false
+    url: jdbc:mysql://39.98.41.126:3306/strip?useSSL=false
     username: ${MYSQL_USERNAME:root}
-    password: ${MYSQL_PASSWORD:123456}
+    password: ${MYSQL_QGPASSWORD:123456}

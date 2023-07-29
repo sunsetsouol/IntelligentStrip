@@ -8,7 +8,7 @@
         CREATE TABLE if not exists ${tableName}
         (
             `id` bigint primary key AUTO_INCREMENT COMMENT 'id',
-            `warn` int NOT NULL COMMENT '警告',
+            `warn` int COMMENT '警告',
             `temp` decimal(10,1) DEFAULT NULL COMMENT '温度',
             `mq` decimal(10,3) DEFAULT NULL COMMENT '烟雾浓度',
             `socket1` int DEFAULT NULL COMMENT '接口1开关',
@@ -25,7 +25,7 @@
             `vrms3` decimal(10,2) DEFAULT NULL COMMENT '接口3电压',
             `irms3` decimal(10,4) DEFAULT NULL COMMENT '接口3电流',
             `pactive3` decimal(10,2) DEFAULT NULL COMMENT '接口3功率',
-            `w_kwh3` decimal(10,4) DEFAULT NULL COMMENT '接口3用电量',
+            `w_kwh3` decimal(10,4) DEFAULT NULL COMMENT '接口3用电量'
             )
     </update>
 
