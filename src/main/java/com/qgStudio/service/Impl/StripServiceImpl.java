@@ -7,6 +7,7 @@ import com.qgStudio.service.StripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -24,15 +25,10 @@ public class StripServiceImpl extends ServiceImpl<StripMapper, Strip> implements
 
 
     @Override
-    public void insert(Strip strip) {
-        stripMapper.insert(strip);
-    }
-
-    @Override
-    public void createTable() {
-        String format = Strip.format.format(new Date());
-        String tableName = TABLENAME + format;
-        System.out.println(tableName);
-        stripMapper.createTable(tableName);
+    public void insert(Strip strip) throws IOException {
+        String format = Strip.format1.format(new Date());
+        strip.setTime(Strip.format2.format(new Date()));
+        stripMapper.createTable(TABLENAME + format);
+        stripMapper.add(TABLENAME + format,strip);
     }
 }

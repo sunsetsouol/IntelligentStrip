@@ -8,7 +8,7 @@
         CREATE TABLE if not exists ${tableName}
         (
             `id` bigint primary key AUTO_INCREMENT COMMENT 'id',
-            `equipment` varchar(255) NOT NULL COMMENT '设备编号',
+            `warn` int NOT NULL COMMENT '警告',
             `temp` decimal(10,1) DEFAULT NULL COMMENT '温度',
             `mq` decimal(10,3) DEFAULT NULL COMMENT '烟雾浓度',
             `socket1` int DEFAULT NULL COMMENT '接口1开关',
@@ -26,8 +26,6 @@
             `irms3` decimal(10,4) DEFAULT NULL COMMENT '接口3电流',
             `pactive3` decimal(10,2) DEFAULT NULL COMMENT '接口3功率',
             `w_kwh3` decimal(10,4) DEFAULT NULL COMMENT '接口3用电量',
-            KEY `fk_equ_id` (`equipment`),
-            CONSTRAINT ${foreignKey} FOREIGN KEY (`equipment`) REFERENCES `user` (`equipment`)
             )
     </update>
 
