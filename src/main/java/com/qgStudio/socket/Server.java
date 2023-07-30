@@ -1,4 +1,4 @@
-package com.qgStudio;
+package com.qgStudio.socket;
 
 
 import com.qgStudio.service.Impl.StripServiceImpl;

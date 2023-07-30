@@ -1,6 +1,7 @@
-package com.qgStudio;
+package com.qgStudio.socket;
 
 import com.alibaba.fastjson.JSON;
+import com.qgStudio.WebSocketHandler;
 import com.qgStudio.entity.Strip;
 import com.qgStudio.service.StripService;
 import io.netty.buffer.ByteBuf;
