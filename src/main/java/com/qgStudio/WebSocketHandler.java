@@ -29,6 +29,7 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<TextWebSocketF
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("channel active");
         Strip strip = stripMapper.selectNew("strip_" + Strip.format1.format(new Date()));
         System.out.println(strip);
         for (Channel channel : WebSocketServer.channelGroup) {
@@ -39,6 +40,7 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<TextWebSocketF
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("channel inactive");
         WebSocketServer.channelGroup.remove(ctx.channel());
     }
 

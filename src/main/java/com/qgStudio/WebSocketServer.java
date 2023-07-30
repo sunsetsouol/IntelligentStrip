@@ -52,8 +52,6 @@ public class WebSocketServer {
                             System.out.println(channelGroup.size());
                             ChannelPipeline pipeline = ch.pipeline();
 
-                            pipeline.addLast(new ReadTimeoutHandler(30));
-                            pipeline.addLast(new WriteTimeoutHandler(30));
 
 
                             // HTTP 编解码器
@@ -68,9 +66,13 @@ public class WebSocketServer {
                             // 处理其他的 WebSocketFrame
                             pipeline.addLast(new WebSocketServerProtocolHandler("/websocket"));
                             System.out.println("4---------------------------");
+                            pipeline.addLast(new ReadTimeoutHandler(30));
+                            pipeline.addLast(new WriteTimeoutHandler(30));
+
+                            System.out.println("5-----------------------");
                             // 自定义处理 WebSocket 消息的逻辑
                             pipeline.addLast(webSocketHandler);
-                            System.out.println("5-------------------");
+                            System.out.println("6-------------------");
                         }
 
                     });

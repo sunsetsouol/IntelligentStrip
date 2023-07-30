@@ -1,10 +1,11 @@
-package com.qgStudio;
+package com.qgStudio.Websocket;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
+import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 import java.util.concurrent.ConcurrentHashMap;
@@ -12,7 +13,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 @Component
 @Slf4j
-@ServerEndpoint("/websocket/{userId}")
+@ServerEndpoint("/websocket")
 public class WebSocket {
 
     private Session session;
@@ -22,6 +23,13 @@ public class WebSocket {
     private static CopyOnWriteArrayList<WebSocket> webSockets = new CopyOnWriteArrayList<>();
 
     private static ConcurrentHashMap<String ,Session> sessionPool = new ConcurrentHashMap<>();
+
+    @OnOpen
+    public void onOpen(Session session){
+        this.session = session;
+        webSockets.add(this);
+
+    }
 
     @OnClose
     public void onClose(){

@@ -25,7 +25,6 @@ public class UserController {
      */
     @PostMapping
     public Result register(@RequestBody User user){
-        System.out.println(user);
         return service.add(user);
     }
 
