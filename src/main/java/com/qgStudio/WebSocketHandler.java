@@ -38,11 +38,11 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<TextWebSocketF
         }
     }
 
-    @Override
-    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("channel inactive");
-        WebSocketServer.channelGroup.remove(ctx.channel());
-    }
+//    @Override
+//    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+//        System.out.println("channel inactive");
+//        WebSocketServer.channelGroup.remove(ctx.channel());
+//    }
 
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
@@ -53,7 +53,7 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<TextWebSocketF
         System.out.println("send message");
         for (Channel channel : WebSocketServer.channelGroup) {
             System.out.println(channel.remoteAddress());
-            channel.writeAndFlush(string );
+            channel.writeAndFlush(new TextWebSocketFrame(string) );
             channel.flush();
         }
     }

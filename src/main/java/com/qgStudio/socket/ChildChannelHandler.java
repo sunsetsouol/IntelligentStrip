@@ -23,5 +23,6 @@ public class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
         socketChannel.pipeline().addLast(discardServerHandler);
 
         socketChannel.pipeline().addLast(new ExceptionHandler());
+
     }
 }
