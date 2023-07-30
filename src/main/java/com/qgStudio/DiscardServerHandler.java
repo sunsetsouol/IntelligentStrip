@@ -7,6 +7,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -17,6 +18,8 @@ import javax.annotation.Resource;
 public class DiscardServerHandler extends ChannelInboundHandlerAdapter {
 
 
+    @Autowired
+    private WebSocketHandler webSocketHandler;
     @Resource
     private StripService service;
 
@@ -29,10 +32,9 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter {
                 ByteBuf len = byteBuf.readBytes(buf, 0, byteBuf.readableBytes());
                 Strip strip = (Strip) JSON.parseObject(buf, Strip.class);
 
-                System.out.println(strip);
                 service.insert(strip);
 //                Server.queue.offer(strip);
-
+//                webSocketHandler.sendMessage(strip.toString());
             }
         } catch (Exception e) {
             e.printStackTrace();
