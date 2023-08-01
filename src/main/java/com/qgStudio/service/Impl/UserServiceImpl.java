@@ -4,9 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.qgStudio.controller.Result;
+import com.qgStudio.entity.StripControl;
 import com.qgStudio.entity.User;
 import com.qgStudio.mapper.UserMapper;
 import com.qgStudio.service.UserService;
+import com.qgStudio.socket.ChildChannelHandler;
 import com.qgStudio.utils.JwtUtil;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,5 +112,15 @@ public class UserServiceImpl implements UserService {
         return Result.error(selectOne.getQuestion());
     }
 
+    @Override
+    public Result turn(String msg, String token) {
+        ChildChannelHandler.sendMessage(msg);
+        return Result.success("成功");
+    }
 
+    @Override
+    public Result onTime(String msg, String token) {
+        ChildChannelHandler.sendMessage(msg);
+        return Result.success("成功");
+    }
 }

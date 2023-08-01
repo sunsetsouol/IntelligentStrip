@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.qgStudio.controller.Result;
 import com.qgStudio.entity.User;
 
+import java.util.Map;
+
 public interface UserService {
     Result add(User user);
 
@@ -18,4 +20,8 @@ public interface UserService {
     Result getQuestion(String token);
 
     Result getQuestionByPhone(String phone);
+
+    Result turn(String msg, String token);
+
+    Result onTime(String msg, String token);
 }

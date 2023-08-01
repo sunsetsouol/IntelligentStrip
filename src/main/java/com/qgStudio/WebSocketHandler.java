@@ -1,5 +1,6 @@
 package com.qgStudio;
 
+import com.alibaba.fastjson.JSON;
 import com.qgStudio.entity.Strip;
 import com.qgStudio.mapper.StripMapper;
 import io.netty.channel.Channel;
@@ -16,27 +17,27 @@ import java.util.Date;
 @ChannelHandler.Sharable
 public class WebSocketHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
 
-    @Autowired
-    private StripMapper stripMapper;
+//    @Autowired
+//    private StripMapper stripMapper;
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, TextWebSocketFrame textWebSocketFrame) throws Exception {
         System.out.println("chennelRead0-======================");
         String text = textWebSocketFrame.text();
         System.out.println("text="+text);
-        channelHandlerContext.channel().writeAndFlush(new TextWebSocketFrame(text));
+//        channelHandlerContext.channel().writeAndFlush(new TextWebSocketFrame(text));
     }
 
-    @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("channel active");
-        Strip strip = stripMapper.selectNew("strip_" + Strip.format1.format(new Date()));
-        System.out.println(strip);
-        for (Channel channel : WebSocketServer.channelGroup) {
-            System.out.println(channel.remoteAddress());
-            channel.writeAndFlush(strip.toString() + "\n");
-        }
-    }
+//    @Override
+//    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+//        System.out.println("channel active");
+//        Strip strip = stripMapper.selectNew("strip_" + Strip.format1.format(new Date()));
+//        System.out.println(strip);
+//        for (Channel channel : WebSocketServer.channelGroup) {
+//            System.out.println(channel.remoteAddress());
+//            channel.writeAndFlush(strip.toString() + "\n");
+//        }
+//    }
 
 //    @Override
 //    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
@@ -49,12 +50,13 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<TextWebSocketF
         System.out.println("handlerAdded");
     }
 
-    public void sendMessage(String string) {
+    public void sendMessage(Strip strip) {
         System.out.println("send message");
         for (Channel channel : WebSocketServer.channelGroup) {
             System.out.println(channel.remoteAddress());
-            channel.writeAndFlush(new TextWebSocketFrame(string) );
-            channel.flush();
+            String jsonString = JSON.toJSONString(strip);
+            System.out.println(jsonString);
+            channel.writeAndFlush(new TextWebSocketFrame(jsonString));
         }
     }
 }

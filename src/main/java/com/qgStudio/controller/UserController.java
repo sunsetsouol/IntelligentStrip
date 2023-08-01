@@ -1,5 +1,6 @@
 package com.qgStudio.controller;
 
+import com.qgStudio.entity.StripControl;
 import com.qgStudio.entity.User;
 import com.qgStudio.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
@@ -86,5 +88,18 @@ public class UserController {
         String token = request.getHeader("Authorization");
         return service.bind(user,token);
     }
+
+    @PostMapping("/turn")
+    public Result turn(@RequestBody String msg, HttpServletRequest request){
+        String token = request.getHeader("Authorization");
+        return service.turn(msg,token);
+    }
+
+//    @PostMapping("/time")
+//    public Result onTime(@RequestBody String msg, HttpServletRequest request){
+//        System.out.println(msg);
+//        String token = request.getHeader("Authorization");
+//        return service.onTime(msg,token);
+//    }
 
 }

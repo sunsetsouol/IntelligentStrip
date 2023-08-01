@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 @Component
 public class Server {
 
-//    public static LinkedBlockingQueue<Strip> queue = new LinkedBlockingQueue<>(100);
+
 
     @Autowired
     private static StripService service;

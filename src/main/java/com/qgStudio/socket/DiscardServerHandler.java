@@ -35,7 +35,7 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter {
 
                 service.insert(strip);
 //                Server.queue.offer(strip);
-                webSocketHandler.sendMessage(strip.toString());
+                webSocketHandler.sendMessage(strip);
             }
         } catch (Exception e) {
             e.printStackTrace();

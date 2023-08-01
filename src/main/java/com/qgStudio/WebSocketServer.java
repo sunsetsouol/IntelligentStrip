@@ -53,7 +53,6 @@ public class WebSocketServer {
                             ChannelPipeline pipeline = ch.pipeline();
 
 
-
                             // HTTP 编解码器
                             pipeline.addLast(new HttpServerCodec());
                             System.out.println("1-----");
@@ -66,8 +65,6 @@ public class WebSocketServer {
                             // 处理其他的 WebSocketFrame
                             pipeline.addLast(new WebSocketServerProtocolHandler("/websocket"));
                             System.out.println("4---------------------------");
-                            pipeline.addLast(new ReadTimeoutHandler(100));
-                            pipeline.addLast(new WriteTimeoutHandler(100));
 
                             System.out.println("5-----------------------");
                             // 自定义处理 WebSocket 消息的逻辑
@@ -78,8 +75,8 @@ public class WebSocketServer {
 
                     });
 
-            Channel ch = b.bind(8081).sync().channel();
-            System.out.println("WebSocket服务器已启动，监听端口：8081"  );
+            Channel ch = b.bind(8083).sync().channel();
+            System.out.println("WebSocket服务器已启动，监听端口：8083"  );
 
             ch.closeFuture().sync();
         } finally {
