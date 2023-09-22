@@ -23,6 +23,6 @@ public class IntelligentStripApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         server.run(8082);
-        webSocketServer.start();
+        webSocketServer.start(8081);
     }
 }

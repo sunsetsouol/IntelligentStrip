@@ -36,7 +36,7 @@ public class WebSocketServer {
         this.port = port;
     }
 
-    public void start() throws InterruptedException {
+    public void start(int port) throws InterruptedException {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 
@@ -55,28 +55,20 @@ public class WebSocketServer {
 
                             // HTTP 编解码器
                             pipeline.addLast(new HttpServerCodec());
-                            System.out.println("1-----");
                             // 写文件内容
                             pipeline.addLast(new ChunkedWriteHandler());
-                            System.out.println("2--------------");
                             // 聚合解码 HttpRequest/HttpContent/LastHttpContent 到 FullHttpRequest
                             pipeline.addLast(new HttpObjectAggregator(64 * 1024));
-                            System.out.println("3------------------------");
                             // 处理其他的 WebSocketFrame
                             pipeline.addLast(new WebSocketServerProtocolHandler("/websocket"));
-                            System.out.println("4---------------------------");
-
-                            System.out.println("5-----------------------");
                             // 自定义处理 WebSocket 消息的逻辑
                             pipeline.addLast(webSocketHandler);
-                            System.out.println("6-------------------");
                             pipeline.addLast(new ExceptionHandler());
                         }
 
                     });
 
-            Channel ch = b.bind(8083).sync().channel();
-            System.out.println("WebSocket服务器已启动，监听端口：8083"  );
+            Channel ch = b.bind(port).sync().channel();
 
             ch.closeFuture().sync();
         } finally {
