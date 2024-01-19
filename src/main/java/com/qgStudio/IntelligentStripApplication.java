@@ -24,5 +24,6 @@ public class IntelligentStripApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         server.run(8082);
         webSocketServer.start(8081);
+
     }
 }
